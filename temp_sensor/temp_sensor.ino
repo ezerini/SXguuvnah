@@ -2,19 +2,15 @@
 // TEMP SENSOR on A1
 // remove delays and replace with milli??
 // add to main code and output to screen
-// remove serial printing
-
+// Added display printout
 
 // screen
 
 #include <Wire.h>                     // This library allows you to communicate with I2C / TWI devices 
-
 #include <Adafruit_GFX.h>             // Adafruit graphics library
 #include <Adafruit_SSD1306.h>         // Adafruit Monochrome OLEDs library based on SSD1306 drivers
 #define OLED_RESET 4                  // Reset pin # (or -1 if sharing Arduino reset pin)
 Adafruit_SSD1306 display(OLED_RESET); // ? not sure what this is
-
-
 
 // temp
 
@@ -44,7 +40,6 @@ void loop(void) {
 
   uint8_t i;                            // set a 8-bit integer as 'i'
   float thermValue;                     // create a place to store thermistor value
-
                                         // take N samples in a row, with a slight delay
   for (i=0; i< thermSamples; i++) {
    samples[i] = analogRead(thermPin);   // read the thermistor value
@@ -76,7 +71,9 @@ void loop(void) {
   steinhart += 1.0 / (tempNominal + 273.15);    // + (1/To)
   steinhart = 1.0 / steinhart;                  // Invert
   steinhart -= 273.15;                          // convert to C
- 
+
+
+ // OLED Printout
    display.setCursor(0, 0);
   display.print("Tempe C   ");
   display.println(steinhart);
