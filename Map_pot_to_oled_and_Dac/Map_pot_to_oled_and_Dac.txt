@@ -1,0 +1,64 @@
+
+// PROGRESS
+// Dac installed, but with triangle wave - link to pot
+// Oled installed single number
+
+
+// DAC
+
+#include <Wire.h>
+#include <Adafruit_MCP4725.h>
+Adafruit_MCP4725 dac;
+
+// SCREEN
+
+#include <SPI.h>
+#include <Wire.h>
+#include <Adafruit_GFX.h>
+#include <Adafruit_SSD1306.h>
+#define OLED_RESET 4
+Adafruit_SSD1306 display(OLED_RESET);
+
+
+void setup() 
+{
+  Serial.begin(9600);                   // initialize serial communication at 9600 bits per second:
+
+  // DAC
+
+  dac.begin(0x62);
+
+  // DISPLAY
+
+  display.begin(SSD1306_SWITCHCAPVCC, 0x3D);  // initialize with the I2C addr 0x3C (for the 128x32)
+  display.display();
+  display.clearDisplay();                // Clear the buffer.
+  display.setTextSize(1);
+  display.setCursor(0, 0);
+  display.setTextColor(WHITE);
+
+void loop() {                            // code runs in a loop
+
+  // DAC
+
+  myDac.setVoltage;
+  setVoltage(0 to 4096, false);
+
+  // DISPLAY
+
+    float sensor=analogRead(A0);
+  display.setCursor(0, 0);
+  display.print("Value: ");
+  display.println(sensor);
+  display.display(); //you have to tell the display to...display
+//  delay(2);
+  display.clearDisplay();
+
+
+  // POT
+  
+  int sensorValue = analogRead(A0);     // read the input on analog pin 0:
+  Serial.println(sensorValue);          // print out the value you read:
+//  delay(1);                             // delay in between reads for stability
+}
+}

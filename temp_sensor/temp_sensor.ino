@@ -2,7 +2,8 @@
 // TEMP SENSOR on A1
 // remove delays and replace with milli??
 // add to main code and output to screen
-// Added display printout
+// remove serial printing
+
 
 // screen
 
@@ -28,7 +29,7 @@ void setup(void) {
   display.begin(SSD1306_SWITCHCAPVCC, 0x3D);  // initialize with the I2C addr 0x3C (for the 128x32)
   display.display();                          // display the display!
   display.clearDisplay();                     // clear the buffer.
-  display.setTextSize(2);                     // 
+  display.setTextSize(1);                     // 
   display.setCursor(0, 0);                    // this is supposed to position the text on screen, but doesn't work for me
   display.setTextColor(WHITE);
  
@@ -40,6 +41,7 @@ void loop(void) {
 
   uint8_t i;                            // set a 8-bit integer as 'i'
   float thermValue;                     // create a place to store thermistor value
+
                                         // take N samples in a row, with a slight delay
   for (i=0; i< thermSamples; i++) {
    samples[i] = analogRead(thermPin);   // read the thermistor value
@@ -75,8 +77,8 @@ void loop(void) {
 
  // OLED Printout
    display.setCursor(0, 0);
-  display.print("Tempe C   ");
-  display.println(steinhart);
+  display.print("Temp: ");
+  display.println(steinhart,1);
   display.display();                                //you have to tell the display to...display
 //  delay(20);
   display.clearDisplay();
